@@ -24,8 +24,7 @@ public class CityService {
         return cityRepository.save(city);
     }
 
-    // Find a city by ID
-    public Optional<City> findById(Long id) {
+    public Optional<City> findByCountryId(Long id) {
         return cityRepository.findById(id);
     }
 

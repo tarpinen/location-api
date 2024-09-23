@@ -33,7 +33,7 @@ public class LocationController {
         return continentService.getAllContinents();
     }
 
-    @GetMapping("/continent/get-countries/{id}")
+    @GetMapping("/continent/{id}/get-countries")
     public ResponseEntity<List<Country>> getCountriesByContinentId(@PathVariable("id") Long id) {
         List<Country> countries = continentService.getCountriesByContinentId(id);
         if (countries != null) {
@@ -74,11 +74,21 @@ public class LocationController {
         return countryService.getAllCountries();
     }
 
-    @GetMapping("/country/get-cities/{id}")
+    @GetMapping("/country/{id}/get-cities")
     public ResponseEntity<List<City>> getCitiesByCountryId(@PathVariable("id") Long id) {
         List<City> cities = countryService.getCitiesByCountryId(id);
         if (cities != null) {
             return ResponseEntity.ok(cities);
+        } else {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @GetMapping("country/{id}/get-continent")
+    public ResponseEntity<Continent> getContinentByCountryId(@PathVariable("id") Long id) {
+        Optional<Country> countryOptional = countryService.findByContinentId(id);
+        if (countryOptional.isPresent()) {
+            return ResponseEntity.ok(countryOptional.get().getContinent());
         } else {
             return ResponseEntity.status(404).body(null);
         }
@@ -110,12 +120,11 @@ public class LocationController {
         return ResponseEntity.ok(savedCity);
     }
 
-    // 2. Get a city by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<City> getCityById(@PathVariable("id") Long id) {
-        Optional<City> city = cityService.findById(id);
-        if (city.isPresent()) {
-            return ResponseEntity.ok(city.get());
+    @GetMapping("city/{id}/get-country")
+    public ResponseEntity<Country> getCountryByCityId(@PathVariable("id") Long id) {
+        Optional<City> cityOptional = cityService.findByCountryId(id);
+        if (cityOptional.isPresent()) {
+            return ResponseEntity.ok(cityOptional.get().getCountry());
         } else {
             return ResponseEntity.status(404).body(null);
         }

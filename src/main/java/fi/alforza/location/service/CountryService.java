@@ -22,6 +22,10 @@ public class CountryService {
         return countryRepository.findAll();
     }
 
+    public Optional<Country> findByContinentId(Long id) {
+        return countryRepository.findById(id);
+    }
+
     public List<City> getCitiesByCountryId(Long countryId) {
         Optional<Country> countryOptional = countryRepository.findById(countryId);
         if (countryOptional.isPresent()) {
