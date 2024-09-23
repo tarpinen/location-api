@@ -1,0 +1,45 @@
+plugins {
+	id 'org.springframework.boot' version '3.0.0'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id 'java'
+}
+
+group = 'fi.alforza'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Only add this once and exclude Tomcat here
+	implementation('org.springframework.boot:spring-boot-starter-web') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+	}
+
+	// Spring Boot Data JPA Starter (for JPA and Hibernate)
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// H2 Database (in-memory database)
+	runtimeOnly 'com.h2database:h2'
+
+	// Lombok (for automatic generation of boilerplate code like getters and setters)
+	implementation 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// Spring Boot DevTools (optional, for live reload during development)
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	// Add Undertow support
+	implementation 'org.springframework.boot:spring-boot-starter-undertow'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+tasks.named('test') {
+	useJUnitPlatform()
+}

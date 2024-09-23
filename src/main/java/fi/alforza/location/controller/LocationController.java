@@ -1,0 +1,149 @@
+package fi.alforza.location.controller;
+
+import fi.alforza.location.model.*;
+import fi.alforza.location.service.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/location")
+public class LocationController {
+
+    @Autowired
+    private ContinentService continentService;
+    @Autowired
+    private CountryService countryService;
+    @Autowired
+    private CityService cityService;
+
+
+    @PostMapping("/continent")
+    public ResponseEntity<Continent> createContinent(@RequestBody Continent continent) {
+        Continent savedContinent = continentService.saveContinent(continent);
+        return ResponseEntity.ok(savedContinent);
+    }
+
+    @GetMapping("/get-continents")
+    public List<Continent> getAllContinents() {
+        return continentService.getAllContinents();
+    }
+
+    @GetMapping("/continent/get-countries/{id}")
+    public ResponseEntity<List<Country>> getCountriesByContinentId(@PathVariable("id") Long id) {
+        List<Country> countries = continentService.getCountriesByContinentId(id);
+        if (countries != null) {
+            return ResponseEntity.ok(countries);
+        } else {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @PutMapping("/continent/{id}")
+    public ResponseEntity<Continent> updateContinent(@PathVariable Long id, @RequestBody Continent continentDetails) {
+        Optional<Continent> updatedContinent = continentService.updateContinent(id, continentDetails);
+        if (updatedContinent.isPresent()) {
+            return ResponseEntity.ok(updatedContinent.get());
+        } else {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @DeleteMapping("/continent/{id}")
+    public ResponseEntity<String> deleteContinent(@PathVariable Long id) {
+        boolean deleted = continentService.deleteContinent(id);
+        if (deleted) {
+            return ResponseEntity.ok("Continent with ID " + id + " deleted successfully");
+        } else {
+            return ResponseEntity.status(404).body("Continent with ID " + id + " not found");
+        }
+    }
+
+    @PostMapping("/country")
+    public ResponseEntity<String> createCountry(@RequestBody Country country) {
+        Country savedCountry = countryService.saveCountry(country);
+        return ResponseEntity.ok("Country created successfully");
+    }
+
+    @GetMapping("/get-countries")
+    public List<Country> getAllCountries() {
+        return countryService.getAllCountries();
+    }
+
+    @GetMapping("/country/get-cities/{id}")
+    public ResponseEntity<List<City>> getCitiesByCountryId(@PathVariable("id") Long id) {
+        List<City> cities = countryService.getCitiesByCountryId(id);
+        if (cities != null) {
+            return ResponseEntity.ok(cities);
+        } else {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @PutMapping("/country/{id}")
+    public ResponseEntity<String> updateCountry(@PathVariable Long id, @RequestBody Country countryDetails) {
+        Optional<Country> updatedCountry = countryService.updateCountry(id, countryDetails);
+        if (updatedCountry.isPresent()) {
+            return ResponseEntity.ok("Country updated successfully");
+        } else {
+            return ResponseEntity.status(404).body("Country does not exist");
+        }
+    }
+
+    @DeleteMapping("/country/{id}")
+    public ResponseEntity<String> deleteCountry(@PathVariable Long id) {
+        boolean deleted = countryService.deleteCountry(id);
+        if (deleted) {
+            return ResponseEntity.ok("Country with ID " + id + " deleted successfully");
+        } else {
+            return ResponseEntity.status(404).body("Country with ID " + id + " not found");
+        }
+    }
+
+    @PostMapping("/city")
+    public ResponseEntity<City> createCity(@RequestBody City city) {
+        City savedCity = cityService.saveCity(city);
+        return ResponseEntity.ok(savedCity);
+    }
+
+    // 2. Get a city by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<City> getCityById(@PathVariable("id") Long id) {
+        Optional<City> city = cityService.findById(id);
+        if (city.isPresent()) {
+            return ResponseEntity.ok(city.get());
+        } else {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @GetMapping("/get-cities")
+    public List<City> getAllCities() {
+        return cityService.getAllCities();
+    }
+
+    @PutMapping("/city/{id}")
+    public ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City cityDetails) {
+        Optional<City> updatedCity = cityService.updateCity(id, cityDetails);
+        if (updatedCity.isPresent()) {
+            return ResponseEntity.ok(updatedCity.get());
+        } else {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @DeleteMapping("/city/{id}")
+    public ResponseEntity<String> deleteCity(@PathVariable Long id) {
+        boolean deleted = cityService.deleteCity(id);
+        if (deleted) {
+            return ResponseEntity.ok("City with ID " + id + " deleted successfully");
+        } else {
+            return ResponseEntity.status(404).body("City with ID " + id + " not found");
+        }
+    }
+
+}
