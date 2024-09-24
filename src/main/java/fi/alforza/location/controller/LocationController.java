@@ -58,7 +58,7 @@ public class LocationController {
     public ResponseEntity<String> deleteContinent(@PathVariable Long id) {
         boolean deleted = continentService.deleteContinent(id);
         if (deleted) {
-            return ResponseEntity.ok("Continent with ID " + id + " deleted successfully");
+            return ResponseEntity.ok("Continent with ID " + id + " and associated countries deleted successfully");
         } else {
             return ResponseEntity.status(404).body("Continent with ID " + id + " not found");
         }
@@ -109,7 +109,7 @@ public class LocationController {
     public ResponseEntity<String> deleteCountry(@PathVariable Long id) {
         boolean deleted = countryService.deleteCountry(id);
         if (deleted) {
-            return ResponseEntity.ok("Country with ID " + id + " deleted successfully");
+            return ResponseEntity.ok("Country with ID " + id + " and associated cities deleted successfully");
         } else {
             return ResponseEntity.status(404).body("Country with ID " + id + " not found");
         }

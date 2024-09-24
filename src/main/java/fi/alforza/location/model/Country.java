@@ -19,12 +19,12 @@ public class Country {
     private String countryName;
 
     @ManyToOne
-    @JoinColumn(name = "continent_id")
+    @JoinColumn(name = "continent_id", nullable = false)
     @NotNull(message = "Continent is required")
     private Continent continent;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "country", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<City> cities;
 
     // Default constructor

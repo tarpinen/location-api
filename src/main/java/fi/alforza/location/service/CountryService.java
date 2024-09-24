@@ -50,7 +50,8 @@ public class CountryService {
     public boolean deleteCountry(Long id) {
         Optional<Country> country = countryRepository.findById(id);
         if (country.isPresent()) {
-            countryRepository.deleteById(id);
+            // This will cascade the delete operation to the associated cities
+            countryRepository.delete(country.get());
             return true;
         }
         return false;

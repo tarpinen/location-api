@@ -13,6 +13,12 @@ relational DB to store the location data.
 
 ## Building and Running the Project
 
+**Clone location-api repository**
+
+git clone https://github.com/tarpinen/location-api.git
+
+cd location-api
+
 ### Local Development without Docker
 
 **Build and run the project**:
@@ -67,7 +73,7 @@ relational DB to store the location data.
   "continentName": "Updated Continent Name"  
   }'
 
-- **DELETE** `/api/location/continent/{id}`: Delete a continent by ID.
+- **DELETE** `/api/location/continent/{id}`: Delete a continent by ID. Deletes also its all child entities recursively.
 
   Example:  
   curl -X DELETE http://localhost:8080/api/location/continent/1
@@ -113,7 +119,7 @@ relational DB to store the location data.
   }  
   }'
 
-- **DELETE** `/api/location/country/{id}`: Delete a country by ID.
+- **DELETE** `/api/location/country/{id}`: Delete a country by ID. Deletes also all its associated cities.
 
   Example:  
   curl -X DELETE http://localhost:8080/api/location/country/1

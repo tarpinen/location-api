@@ -42,7 +42,7 @@ public class ContinentService {
     public boolean deleteContinent(Long id) {
         Optional<Continent> continent = continentRepository.findById(id);
         if (continent.isPresent()) {
-            continentRepository.deleteById(id);
+            continentRepository.delete(continent.get());
             return true;
         }
         return false;

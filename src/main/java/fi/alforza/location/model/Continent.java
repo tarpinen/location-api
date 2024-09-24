@@ -20,7 +20,7 @@ public class Continent {
     private String continentName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "continent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "continent", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Country> countries;
 
     // Default constructor
