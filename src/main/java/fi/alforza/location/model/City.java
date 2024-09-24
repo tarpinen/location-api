@@ -27,7 +27,8 @@ public class City {
     public City() {}
 
     // Constructor with fields
-    public City(String cityName, int population, Country country) {
+    public City(Long cityId, String cityName, Country country) {
+        this.cityId = cityId;
         this.cityName = cityName;
         this.country = country;
     }

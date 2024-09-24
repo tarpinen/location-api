@@ -30,7 +30,9 @@ public class Continent {
     public Continent() {}
 
     // Constructor with fields
-    public Continent(String continentName) {
+    public Continent(Long continentId, String continentName, List<Country> countries) {
+        this.continentId = continentId;
         this.continentName = continentName;
+        this.countries = countries;
     }
 }

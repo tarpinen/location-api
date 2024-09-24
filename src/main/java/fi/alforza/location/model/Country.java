@@ -36,9 +36,11 @@ public class Country {
     // Default constructor
     public Country() {}
 
-    // Constructor with fields
-    public Country(String countryName, Continent continent) {
+    // Constructor
+    public Country(Long countryId, String countryName, Continent continent, List<City> cities) {
+        this.countryId = countryId;
         this.countryName = countryName;
         this.continent = continent;
+        this.cities = cities;
     }
 }

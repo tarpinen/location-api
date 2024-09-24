@@ -115,9 +115,9 @@ public class LocationController {
     }
 
     @PostMapping("/city")
-    public ResponseEntity<City> createCity(@RequestBody City city) {
+    public ResponseEntity<String> createCity(@RequestBody City city) {
         City savedCity = cityService.saveCity(city);
-        return ResponseEntity.ok(savedCity);
+        return ResponseEntity.ok("City created successfully");
     }
 
     @GetMapping("city/{id}/get-country")
@@ -136,10 +136,10 @@ public class LocationController {
     }
 
     @PutMapping("/city/{id}")
-    public ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City cityDetails) {
+    public ResponseEntity<String> updateCity(@PathVariable Long id, @RequestBody City cityDetails) {
         Optional<City> updatedCity = cityService.updateCity(id, cityDetails);
         if (updatedCity.isPresent()) {
-            return ResponseEntity.ok(updatedCity.get());
+            return ResponseEntity.ok("City updated successfully");
         } else {
             return ResponseEntity.status(404).body(null);
         }
@@ -154,5 +154,4 @@ public class LocationController {
             return ResponseEntity.status(404).body("City with ID " + id + " not found");
         }
     }
-
 }

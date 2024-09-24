@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'fi.alforza'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 java {
 	toolchain {
@@ -38,19 +38,19 @@ dependencies {
 	// Add Undertow support
 	implementation 'org.springframework.boot:spring-boot-starter-undertow'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.mockito:mockito-core'
 }
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
 bootJar {
-	archiveFileName = 'location-0.0.1-SNAPSHOT.jar'
+	archiveFileName = 'location-1.0.0.jar'
 }
 
 jar {
 	enabled = false
-	archiveFileName = 'location-0.0.1-SNAPSHOT.jar'
+	archiveFileName = 'location-1.0.0.jar'
 	manifest {
 		attributes(
 				'Main-Class': 'fi.alforza.location.LocationRestapiApplication'

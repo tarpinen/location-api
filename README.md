@@ -1,6 +1,9 @@
 # Location REST API
 
 This project is a REST API for managing locations: continents, countries, and cities.
+The implementation is based on utilization of Spring framework and Hibernate. Undertow web server
+is embedded to the application where it is executed and the application utilizes H2 file-system based
+relational DB to store the location data. 
 
 ## Prerequisites
 
