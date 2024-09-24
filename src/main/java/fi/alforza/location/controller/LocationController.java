@@ -3,6 +3,7 @@ package fi.alforza.location.controller;
 import fi.alforza.location.model.*;
 import fi.alforza.location.service.*;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class LocationController {
 
 
     @PostMapping("/continent")
-    public ResponseEntity<Continent> createContinent(@RequestBody Continent continent) {
+    public ResponseEntity<Continent> createContinent(@Valid @RequestBody Continent continent) {
         Continent savedContinent = continentService.saveContinent(continent);
         return ResponseEntity.ok(savedContinent);
     }
@@ -44,7 +45,7 @@ public class LocationController {
     }
 
     @PutMapping("/continent/{id}")
-    public ResponseEntity<Continent> updateContinent(@PathVariable Long id, @RequestBody Continent continentDetails) {
+    public ResponseEntity<Continent> updateContinent(@PathVariable Long id, @Valid @RequestBody Continent continentDetails) {
         Optional<Continent> updatedContinent = continentService.updateContinent(id, continentDetails);
         if (updatedContinent.isPresent()) {
             return ResponseEntity.ok(updatedContinent.get());
@@ -64,7 +65,7 @@ public class LocationController {
     }
 
     @PostMapping("/country")
-    public ResponseEntity<String> createCountry(@RequestBody Country country) {
+    public ResponseEntity<String> createCountry(@Valid @RequestBody Country country) {
         Country savedCountry = countryService.saveCountry(country);
         return ResponseEntity.ok("Country created successfully");
     }
@@ -95,7 +96,7 @@ public class LocationController {
     }
 
     @PutMapping("/country/{id}")
-    public ResponseEntity<String> updateCountry(@PathVariable Long id, @RequestBody Country countryDetails) {
+    public ResponseEntity<String> updateCountry(@PathVariable Long id, @Valid @RequestBody Country countryDetails) {
         Optional<Country> updatedCountry = countryService.updateCountry(id, countryDetails);
         if (updatedCountry.isPresent()) {
             return ResponseEntity.ok("Country updated successfully");
@@ -115,7 +116,7 @@ public class LocationController {
     }
 
     @PostMapping("/city")
-    public ResponseEntity<String> createCity(@RequestBody City city) {
+    public ResponseEntity<String> createCity(@Valid @RequestBody City city) {
         City savedCity = cityService.saveCity(city);
         return ResponseEntity.ok("City created successfully");
     }
@@ -136,7 +137,7 @@ public class LocationController {
     }
 
     @PutMapping("/city/{id}")
-    public ResponseEntity<String> updateCity(@PathVariable Long id, @RequestBody City cityDetails) {
+    public ResponseEntity<String> updateCity(@PathVariable Long id, @Valid @RequestBody City cityDetails) {
         Optional<City> updatedCity = cityService.updateCity(id, cityDetails);
         if (updatedCity.isPresent()) {
             return ResponseEntity.ok("City updated successfully");

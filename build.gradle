@@ -26,6 +26,9 @@ dependencies {
 	// Spring Boot Data JPA Starter (for JPA and Hibernate)
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+	// Field validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 	// H2 Database (in-memory database)
 	runtimeOnly 'com.h2database:h2'
 
@@ -35,8 +38,11 @@ dependencies {
 
 	// Spring Boot DevTools (optional, for live reload during development)
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 	// Add Undertow support
 	implementation 'org.springframework.boot:spring-boot-starter-undertow'
+
+	// Test dependencies
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mockito:mockito-core'
 }

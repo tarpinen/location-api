@@ -1,26 +1,24 @@
 package fi.alforza.location.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+@Entity @Getter @Setter
 public class City {
 
-    @Setter
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cityId;
 
-    @Setter
-    @Getter
+    @NotBlank
     private String cityName;
 
-    @Setter
-    @Getter
     @ManyToOne
     @JoinColumn(name = "country_id")
+    @NotNull(message = "Country is required")
     private Country country;
 
     // Default constructor

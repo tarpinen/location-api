@@ -2,33 +2,27 @@ package fi.alforza.location.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
 
-@Entity
+@Entity @Getter @Setter
 public class Country {
 
-    // Getters and Setters
-    @Setter
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long countryId;
 
-    @Setter
-    @Getter
+    @NotBlank(message = "Country name is required")
     private String countryName;
 
-    @Setter
-    @Getter
     @ManyToOne
     @JoinColumn(name = "continent_id")
+    @NotNull(message = "Continent is required")
     private Continent continent;
 
-    @Setter
-    @Getter
     @JsonIgnore
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
     private List<City> cities;
