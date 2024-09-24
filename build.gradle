@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'fi.alforza'
-version = '1.0.0'
+version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
@@ -45,12 +45,12 @@ tasks.named('test') {
 }
 
 bootJar {
-	archiveFileName = 'location-1.0.0.jar'
+	archiveFileName = 'location-0.0.1-SNAPSHOT.jar'
 }
 
 jar {
 	enabled = false
-	archiveFileName = 'location-1.0.0.jar'
+	archiveFileName = 'location-0.0.1-SNAPSHOT.jar'
 	manifest {
 		attributes(
 				'Main-Class': 'fi.alforza.location.LocationRestapiApplication'
